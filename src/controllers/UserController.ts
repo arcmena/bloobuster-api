@@ -19,10 +19,24 @@ const POST = {
             res.status(500).send({ error: error.message });
         }
     },
+};
+
+const GET = {
+    getUsers: async (req: Request, res: Response) => {
+        try {
+            const userService = new UserService();
+
+            const users = await userService.getUsers();
+
+            res.status(200).send({ thebois: users });
+        } catch (error) {
+            res.status(500).send({ error: error.message });
+        }
+    },
 
     getUserById: async (req: Request, res: Response) => {
         try {
-            const { username } = req.body;
+            const { username } = req.params;
 
             const userService = new UserService();
 
@@ -35,20 +49,6 @@ const POST = {
             }
 
             res.status(200).send(user);
-        } catch (error) {
-            res.status(500).send({ error: error.message });
-        }
-    },
-};
-
-const GET = {
-    getUsers: async (req: Request, res: Response) => {
-        try {
-            const userService = new UserService();
-
-            const users = await userService.getUsers();
-
-            res.status(200).send({ thebois: users });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
