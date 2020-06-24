@@ -34,13 +34,13 @@ const GET = {
         }
     },
 
-    getUserById: async (req: Request, res: Response) => {
+    getUserByUsername: async (req: Request, res: Response) => {
         try {
             const { username } = req.params;
 
             const userService = new UserService();
 
-            const user = await userService.getUserById(username);
+            const user = await userService.getUserByUsername(username);
 
             if (!user) {
                 res.status(400).send({

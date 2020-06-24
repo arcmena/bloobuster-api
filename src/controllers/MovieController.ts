@@ -3,6 +3,30 @@ import { Request, Response } from "express";
 import ApiService from "../services/ApiService";
 
 const GET = {
+    index: async (req: Request, res: Response) => {
+        try {
+            const apiService = new ApiService();
+
+            const result = await apiService.index();
+
+            res.status(200).send(result);
+        } catch (error) {
+            res.status(500).send({ error: error.message });
+        }
+    },
+
+    movieIndex: async (req: Request, res: Response) => {
+        try {
+            const apiService = new ApiService();
+
+            const result = await apiService.indexMovies();
+
+            res.status(200).send(result);
+        } catch (error) {
+            res.status(500).send({ error: error.message });
+        }
+    },
+
     searchByTitle: async (req: Request, res: Response) => {
         try {
             const { title } = req.params;

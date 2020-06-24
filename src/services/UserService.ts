@@ -15,7 +15,7 @@ export default class UserService {
                 .catch((error) => reject(error))
         );
 
-    getUserById = (username: string): Promise<User> =>
+    getUserByUsername = (username: string): Promise<User> =>
         new Promise((resolve, reject) =>
             User.findOne({
                 where: {

@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "files.exclude": {
+        ".localstack": true,
+        "database": true,
+        "node_modules": true,
+        "docs": true,
+        "tmp": true,
+        ".eslintrc": true,
+        ".prettierrc": true,
+        ".sequelizerc": true,
+        "jest.config.js": true,
+        "localstack.yml": true,
+        "tsconfig.json": true,
+        "tsconfig.release.json": true
+    }
+}
