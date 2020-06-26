@@ -12,6 +12,7 @@ route.post("/createUser", UserController.createUser);
 route.post("/login", UserController.login);
 
 route.get("/posts/:id", PostController.getPostById);
+route.get("/posts", PostController.getPosts);
 route.post("/posts/createPost", PostController.createPost);
 
 route.get("/index", MovieController.index);

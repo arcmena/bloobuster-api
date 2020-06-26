@@ -14,6 +14,7 @@ export interface PostInterface {
     authorId: number;
     titleId?: string;
     content: string;
+    titleInfo?: Object;
 }
 
 @Table({ tableName: "posts" })
