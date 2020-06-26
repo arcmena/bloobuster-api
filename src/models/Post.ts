@@ -12,7 +12,7 @@ import User from "./User";
 export interface PostInterface {
     type: string;
     authorId: number;
-    titleId?: number;
+    titleId?: string;
     content: string;
 }
 
@@ -30,7 +30,7 @@ export default class Post extends Model<Post> implements PostInterface {
 
     @AllowNull(true)
     @Column
-    titleId: number;
+    titleId: string;
 
     @Column
     content: string;
