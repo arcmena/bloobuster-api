@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
 
 import UserService from "../services/UserService";
 
-// TODO: CREATE PASSWORD ENCRYPTION
+// TODO: CREATE GENERATE TOKEN METHOD IN LOGIN
 
 const POST = {
     createUser: async (req: Request, res: Response) => {
@@ -11,10 +12,31 @@ const POST = {
 
             const userService = new UserService();
 
+            const hashcode = await bcrypt.hash(password, 8);
+
             await userService
-                .createUser({ username, name, email, password })
+                .createUser({ username, name, email, password: hashcode })
                 .then((user) => res.status(201).send(user))
                 .catch((error) => res.status(500).send(error));
+        } catch (error) {
+            res.status(500).send({ error: error.message });
+        }
+    },
+
+    login: async (req: Request, res: Response) => {
+        try {
+            const { username, password } = req.body;
+
+            const userService = new UserService();
+
+            const user = await userService.getUserByUsername(username);
+
+            if (!user || !(await bcrypt.compare(password, user.password)))
+                throw new Error("Credentials don't match");
+
+            const { id, name, email } = user;
+
+            res.status(200).send({ user: { id, name, username, email } });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -28,7 +50,7 @@ const GET = {
 
             const users = await userService.getUsers();
 
-            res.status(200).send({ thebois: users });
+            res.status(200).send({ users });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }

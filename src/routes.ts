@@ -6,8 +6,9 @@ import MovieController from "./controllers/MovieController";
 const route = express.Router();
 
 route.get("/", UserController.getUsers);
-route.get("/username/:username", UserController.getUserByUsername);
+route.get("/user/:username", UserController.getUserByUsername);
 route.post("/createUser", UserController.createUser);
+route.post("/login", UserController.login);
 
 route.get("/index", MovieController.index);
 route.get("/movieIndex", MovieController.movieIndex);
