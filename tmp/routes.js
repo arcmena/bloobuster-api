@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const express_1 = tslib_1.__importDefault(require("express"));
+const UserController_1 = tslib_1.__importDefault(require("./controllers/UserController"));
+const MovieController_1 = tslib_1.__importDefault(require("./controllers/MovieController"));
+const PostController_1 = tslib_1.__importDefault(require("./controllers/PostController"));
+const route = express_1.default.Router();
+route.get("/", UserController_1.default.getUsers);
+route.get("/user/:username", UserController_1.default.getUserByUsername);
+route.post("/createUser", UserController_1.default.createUser);
+route.post("/login", UserController_1.default.login);
+route.get("/posts/:id", PostController_1.default.getPostById);
+route.get("/posts", PostController_1.default.getPosts);
+route.post("/posts/createPost", PostController_1.default.createPost);
+route.get("/index", MovieController_1.default.index);
+route.get("/movieIndex", MovieController_1.default.movieIndex);
+route.get("/search/:title", MovieController_1.default.searchByTitle);
+route.get("/title/:id", MovieController_1.default.getTitleById);
+exports.default = route;
+//# sourceMappingURL=routes.js.map

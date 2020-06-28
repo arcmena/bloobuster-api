@@ -8,19 +8,31 @@ import {
 
 import User from "./User";
 
-export interface PostInterface {
+export interface ReviewInterface {
     authorId: number;
     content: string;
+    titleId: string;
+    title: string;
+    titleImg: string;
 }
 
-@Table({ tableName: "post" })
-export default class Post extends Model<Post> implements PostInterface {
+@Table({ tableName: "review" })
+export default class Review extends Model<Review> implements ReviewInterface {
     @ForeignKey(() => User)
     @Column
     authorId: number;
 
     @Column
     content: string;
+
+    @Column
+    titleId: string;
+
+    @Column
+    title: string;
+
+    @Column
+    titleImg: string;
 
     @BelongsTo(() => User)
     user: User;

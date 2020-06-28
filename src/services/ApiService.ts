@@ -1,8 +1,6 @@
 import axios from "axios";
 import { resolve, reject } from "bluebird";
 
-import Post from "../models/Post";
-
 const { API_KEY, API_ENDPOINT } = process.env;
 
 export default class ApiService {

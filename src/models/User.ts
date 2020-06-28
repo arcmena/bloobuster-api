@@ -7,6 +7,7 @@ import {
     HasMany,
 } from "sequelize-typescript";
 
+import Review from "./Review";
 import Post from "./Post";
 
 export interface UserInterface {
@@ -35,6 +36,9 @@ export default class User extends Model<User> implements UserInterface {
     @AllowNull(false)
     @Column
     password: string;
+
+    @HasMany(() => Review)
+    review: Review[];
 
     @HasMany(() => Post)
     post: Post[];

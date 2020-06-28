@@ -15,9 +15,9 @@ export default class PostService {
                 .catch((error) => reject(error))
         );
 
-    createPost = (postData: PostInterface): Promise<Post> =>
+    createPost = (data: PostInterface): Promise<Post> =>
         new Promise((resolve, reject) =>
-            Post.create(postData)
+            Post.create(data)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         );

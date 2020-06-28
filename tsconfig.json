@@ -4,7 +4,7 @@
         "module": "commonjs",
         "lib": ["es6"],
         "allowJs": true,
-        "outDir": "./dist",
+        "outDir": "tmp",
         "rootDir": "./src",
         "removeComments": true,
         "typeRoots": ["./node_modules/@types"],
@@ -13,6 +13,19 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
-    }
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "importHelpers": true,
+        "alwaysStrict": true,
+        "sourceMap": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitAny": false,
+        "noImplicitThis": false,
+        "strictNullChecks": false
+    },
+    "include": ["src"]
 }
