@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import ApiService from "../services/ApiService";
 
 const GET = {
-    index: async (req: Request, res: Response) => {
+    index: async (_req: Request, res: Response) => {
         try {
             const apiService = new ApiService();
 
@@ -15,11 +15,11 @@ const GET = {
         }
     },
 
-    movieIndex: async (req: Request, res: Response) => {
+    movieIndex: async (_req: Request, res: Response) => {
         try {
             const apiService = new ApiService();
 
-            const result = await apiService.indexMovies();
+            const result = await apiService.movieIndex();
 
             res.status(200).send(result);
         } catch (error) {

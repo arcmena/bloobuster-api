@@ -30,7 +30,7 @@ export default class ApiService {
             .catch((error) => reject(error));
     };
 
-    indexMovies = async () => {
+    movieIndex = async () => {
         return Promise.all([
             axios.get(`${API_ENDPOINT}/MostPopularMovies/${API_KEY}`), //trending movies
             axios.get(`${API_ENDPOINT}/ComingSoon/${API_KEY}`), //coming soon movies

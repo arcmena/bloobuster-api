@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import UserService from "../services/UserService";
-
-// TODO: CREATE GENERATE TOKEN METHOD IN LOGIN
 
 const POST = {
     createUser: async (req: Request, res: Response) => {
@@ -34,9 +33,20 @@ const POST = {
             if (!user || !(await bcrypt.compare(password, user.password)))
                 throw new Error("Credentials don't match");
 
-            const { id, name, email } = user;
+            const { id, email } = user;
 
-            res.status(200).send({ user: { id, name, username, email } });
+            const token = jwt.sign(
+                { id, username, email },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: "1d",
+                }
+            );
+
+            res.status(200).send({
+                token,
+                user: { id, username, email },
+            });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -44,7 +54,7 @@ const POST = {
 };
 
 const GET = {
-    getUsers: async (req: Request, res: Response) => {
+    getUsers: async (_req: Request, res: Response) => {
         try {
             const userService = new UserService();
 
