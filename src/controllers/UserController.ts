@@ -33,7 +33,7 @@ const POST = {
             if (!user || !(await bcrypt.compare(password, user.password)))
                 throw new Error("Credentials don't match");
 
-            const { id, email } = user;
+            const { id, email, name } = user;
 
             const token = jwt.sign(
                 { id, username, email },
@@ -45,7 +45,7 @@ const POST = {
 
             res.status(200).send({
                 token,
-                user: { id, username, email },
+                user: { id, username, name, email },
             });
         } catch (error) {
             res.status(500).send({ error: error.message });
@@ -84,6 +84,22 @@ const GET = {
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
+    },
+
+    refreshToken: async (req: Request, res: Response) => {
+        const {
+            user: { id, username, email },
+        } = req.body;
+
+        const token = jwt.sign(
+            { id, username, email },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1d",
+            }
+        );
+
+        return res.status(200).send({ token, user: { id, username } });
     },
 };
 

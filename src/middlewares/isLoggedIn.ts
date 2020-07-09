@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const [token] = req.headers["authorization"].split(" ");
+        const [, token] = req.headers["authorization"].split(" ");
 
         if (!token) {
             throw new Error("User not authorized");
