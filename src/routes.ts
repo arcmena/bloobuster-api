@@ -8,7 +8,6 @@ import PostController from "./controllers/PostController";
 
 //Middlewares
 import isLoggedIn from "./middlewares/isLoggedIn";
-import User from "./models/User";
 
 const route = express.Router();
 
@@ -17,7 +16,7 @@ route.get("/users/all", UserController.getUsers);
 route.get("/user/:username", UserController.getUserByUsername);
 
 //Client User
-route.get("/refreshToken", UserController.refreshToken);
+route.get("/refreshToken", isLoggedIn, UserController.refreshToken);
 route.post("/createUser", UserController.createUser);
 route.post("/login", UserController.login);
 
