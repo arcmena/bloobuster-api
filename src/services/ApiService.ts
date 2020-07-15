@@ -1,6 +1,8 @@
 import axios from "axios";
 import { resolve, reject } from "bluebird";
 
+//TODO: CHANGE THIS SHIET TO NODE-FETCH
+
 const { API_KEY, API_ENDPOINT } = process.env;
 
 export default class ApiService {
@@ -23,8 +25,20 @@ export default class ApiService {
         ])
             .then((response) =>
                 resolve({
-                    mostPopular: response[0].data.items.slice(0, 10),
-                    comingSoon: response[1].data.items,
+                    mostPopular: response[0].data.items
+                        .slice(0, 10)
+                        .map((movie) => {
+                            const resizedPoster = movie.image
+                                .split("V1_")[0]
+                                .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                            return { ...movie, resizedPoster };
+                        }),
+                    comingSoon: response[1].data.items.map((movie) => {
+                        const resizedPoster = movie.image
+                            .split("V1_")[0]
+                            .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                        return { ...movie, resizedPoster };
+                    }),
                 })
             )
             .catch((error) => reject(error));
@@ -41,12 +55,48 @@ export default class ApiService {
         ])
             .then((response) =>
                 resolve({
-                    mostPopular: response[0].data.items.slice(0, 25),
-                    comingSoon: response[1].data.items,
-                    action: response[2].data.items.slice(0, 25),
-                    adventure: response[3].data.items.slice(0, 25),
-                    scifi: response[4].data.items.slice(0, 25),
-                    animation: response[5].data.items.slice(0, 25),
+                    mostPopular: response[0].data.items
+                        .slice(0, 25)
+                        .map((movie) => {
+                            const resizedPoster = movie.image
+                                .split("V1_")[0]
+                                .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                            return { ...movie, resizedPoster };
+                        }),
+                    comingSoon: response[1].data.items.map((movie) => {
+                        const resizedPoster = movie.image
+                            .split("V1_")[0]
+                            .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                        return { ...movie, resizedPoster };
+                    }),
+                    action: response[2].data.items.slice(0, 25).map((movie) => {
+                        const resizedPoster = movie.image
+                            .split("V1_")[0]
+                            .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                        return { ...movie, resizedPoster };
+                    }),
+                    adventure: response[3].data.items
+                        .slice(0, 25)
+                        .map((movie) => {
+                            const resizedPoster = movie.image
+                                .split("V1_")[0]
+                                .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                            return { ...movie, resizedPoster };
+                        }),
+                    scifi: response[4].data.items.slice(0, 25).map((movie) => {
+                        const resizedPoster = movie.image
+                            .split("V1_")[0]
+                            .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                        return { ...movie, resizedPoster };
+                    }),
+                    animation: response[5].data.items
+                        .slice(0, 25)
+                        .map((movie) => {
+                            const resizedPoster = movie.image
+                                .split("V1_")[0]
+                                .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+                            return { ...movie, resizedPoster };
+                        }),
                 })
             )
             .catch((error) => reject(error));

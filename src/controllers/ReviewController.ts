@@ -49,15 +49,19 @@ const POST = {
 
             const titleInfo = await apiService.getTitleById(titleId);
 
-            const Review = await reviewService.createReview(
+            const imgUrl = String(titleInfo.image)
+                .split("V1_")[0]
+                .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+
+            await reviewService.createReview(
                 authorId,
                 content,
                 titleId,
                 titleInfo.title,
-                titleInfo.image
+                imgUrl
             );
 
-            res.status(201).send({ Review });
+            res.status(201).send({ message: "Review Created!" });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }

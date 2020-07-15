@@ -25,4 +25,11 @@ export default class UserService {
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         );
+
+    getUserById = (id: number): Promise<User> =>
+        new Promise((resolve, reject) =>
+            User.findByPk(id)
+                .then((response) => resolve(response))
+                .catch((error) => reject(error))
+        );
 }

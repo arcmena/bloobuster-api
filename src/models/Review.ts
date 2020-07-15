@@ -35,5 +35,5 @@ export default class Review extends Model<Review> implements ReviewInterface {
     titleImg: string;
 
     @BelongsTo(() => User)
-    user: User;
+    authorInfo: User;
 }
