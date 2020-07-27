@@ -28,4 +28,3 @@ It's going to be integrated with IMDb-API to search and relate to the user in th
 ## Author
 
 -   **Marcelo Mena** [arcmena](https://github.com/arcmena)
-    s
