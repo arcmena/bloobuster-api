@@ -6,14 +6,20 @@ import {
     BelongsTo,
 } from "sequelize-typescript";
 
+import { DataTypes } from "sequelize";
+
 import User from "./User";
 
 export interface PostInterface {
     authorId: number;
     content: string;
+    titleId?: string;
+    title?: string;
+    titleImg?: string;
+    rating: number;
 }
 
-@Table({ tableName: "post" })
+@Table({ tableName: "posts" })
 export default class Post extends Model<Post> implements PostInterface {
     @ForeignKey(() => User)
     @Column
@@ -22,6 +28,18 @@ export default class Post extends Model<Post> implements PostInterface {
     @Column
     content: string;
 
+    @Column(DataTypes.TEXT)
+    titleId: string;
+
+    @Column
+    title: string;
+
+    @Column
+    titleImg: string;
+
+    @Column
+    rating: number;
+
     @BelongsTo(() => User)
-    user: User;
+    authorInfo: User;
 }

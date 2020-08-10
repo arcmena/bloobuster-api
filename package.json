@@ -5,7 +5,7 @@
     "author": "Marcelo Mena <marcelomena010@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "ts-node-dev --no-notify --respawn --transpileOnly --ignore-watch node_modules ./src/server.ts",
+        "start": "ts-node-dev --no-notify --respawn --transpile-only --ignore-watch node_modules ./src/server.ts",
         "build": "tsc -p tsconfig.json"
     },
     "dependencies": {

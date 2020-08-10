@@ -1,23 +1,9 @@
-import Post, { PostInterface } from "../models/Post";
+import Post from "../models/Post";
 
 export default class PostService {
-    getPosts = (): Promise<Post[]> =>
+    createPost = (authorId: number, content: string): Promise<Post> =>
         new Promise((resolve, reject) =>
-            Post.findAll()
-                .then((response) => resolve(response))
-                .catch((error) => reject(error))
-        );
-
-    getPostById = (id: number): Promise<Post> =>
-        new Promise((resolve, reject) =>
-            Post.findByPk(id)
-                .then((response) => resolve(response))
-                .catch((error) => reject(error))
-        );
-
-    createPost = (data: PostInterface): Promise<Post> =>
-        new Promise((resolve, reject) =>
-            Post.create(data)
+            Post.create({ authorId, content })
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         );

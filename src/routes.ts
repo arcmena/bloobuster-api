@@ -3,8 +3,7 @@ import express from "express";
 //Controllers
 import UserController from "./controllers/UserController";
 import ApiController from "./controllers/ApiController";
-import ReviewController from "./controllers/ReviewController";
-import PostController from "./controllers/PostController";
+import ReviewController from "./controllers/PostController";
 
 //Middlewares
 import isLoggedIn from "./middlewares/isLoggedIn";
@@ -21,15 +20,10 @@ route.get("/getUser/:id", isLoggedIn, UserController.getUserById);
 route.post("/createUser", UserController.createUser);
 route.post("/login", UserController.login);
 
-// Review
-route.get("/review/:id", isLoggedIn, ReviewController.getReviewById);
-route.get("/reviews", isLoggedIn, ReviewController.getReviews);
-route.post("/review/createReview", isLoggedIn, ReviewController.createReview);
-
 // Post
-route.get("/post/:id", isLoggedIn, PostController.getPostById);
-route.get("/posts", isLoggedIn, PostController.getPosts);
-route.post("/posts/createPost", isLoggedIn, PostController.createPost);
+route.get("/post/:id", isLoggedIn, ReviewController.getPostById);
+route.get("/posts", isLoggedIn, ReviewController.getPosts);
+route.post("/post/createPost", isLoggedIn, ReviewController.createPost);
 
 // IMDb API
 route.get("/index", isLoggedIn, ApiController.index);

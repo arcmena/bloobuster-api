@@ -1,4 +1,4 @@
-import Review from "../models/Review";
+import Review from "../models/Post";
 import User from "../models/User";
 
 export default class ReviewService {
@@ -9,7 +9,7 @@ export default class ReviewService {
                     {
                         model: User,
                         as: "authorInfo",
-                        attributes: ["name", "email"],
+                        attributes: ["username", "email"],
                     },
                 ],
             })
@@ -25,11 +25,12 @@ export default class ReviewService {
         );
 
     createReview = (
-        authorId: string,
+        authorId: number,
         content: string,
         titleId: string,
         title: string,
-        titleImg: string
+        titleImg: string,
+        rating: number
     ): Promise<Review> =>
         new Promise((resolve, reject) =>
             Review.create({
@@ -38,6 +39,7 @@ export default class ReviewService {
                 titleId,
                 title,
                 titleImg,
+                rating
             })
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))

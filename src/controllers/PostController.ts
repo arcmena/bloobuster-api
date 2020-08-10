@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 
+import ReviewService from "../services/ReviewService";
 import PostService from "../services/PostService";
+import ApiService from "../services/ApiService";
 
 const GET = {
     getPosts: async (_req: Request, res: Response) => {
         try {
-            // const { offset } = req.headers;
+            const reviewService = new ReviewService();
 
-            const postService = new PostService();
+            const reviews = await reviewService.getReview();
 
-            const posts = await postService.getPosts();
-
-            res.status(200).send({ posts });
+            res.status(200).send({ reviews });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -21,15 +21,19 @@ const GET = {
         try {
             const { id } = req.params;
 
-            const postService = new PostService();
+            const reviewService = new ReviewService();
 
-            const post = await postService.getPostById(Number(id));
+            const review = await reviewService.getReviewsById(Number(id));
 
-            if (!post) {
-                throw new Error(`No post found with the id ${id}`);
+            if (!review) {
+                throw new Error(`No review found with the id ${id}`);
             }
 
-            res.status(200).send({ post });
+            const apiService = new ApiService();
+
+            const title = await apiService.getTitleById(review.titleId);
+
+            res.status(200).send({ review, titleInfo: title });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -39,13 +43,35 @@ const GET = {
 const POST = {
     createPost: async (req: Request, res: Response) => {
         try {
-            const data = req.body;
+            const { authorId, content, titleId, rating } = req.body;
 
+            const apiService = new ApiService();
+            const reviewService = new ReviewService();
             const postService = new PostService();
 
-            const post = await postService.createPost(data);
+            if (titleId) {
+                const titleInfo = await apiService.getTitleById(titleId);
 
-            res.status(201).send({ post });
+                const imgUrl = String(titleInfo.image)
+                    .split("V1_")[0]
+                    .concat("V1_UX192_CR0,4,192,264_AL_.jpg");
+
+                await reviewService.createReview(
+                    authorId,
+                    content,
+                    titleId,
+                    titleInfo.title,
+                    imgUrl,
+                    rating
+                );
+
+                res.status(201).send({ message: "Review Created!" });
+            } else {
+                await postService.createPost(authorId, content);
+
+                res.status(201).send({ message: "Post Created!" });
+            }
+
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
