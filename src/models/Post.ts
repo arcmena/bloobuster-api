@@ -1,14 +1,8 @@
-import {
-    Table,
-    Model,
-    Column,
-    ForeignKey,
-    BelongsTo,
-} from "sequelize-typescript";
+import { Table, Model, Column, ForeignKey, BelongsTo } from 'sequelize-typescript';
 
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 
-import User from "./User";
+import User from './User';
 
 export interface PostInterface {
     authorId: number;
@@ -19,7 +13,7 @@ export interface PostInterface {
     rating: number;
 }
 
-@Table({ tableName: "posts" })
+@Table({ tableName: 'posts' })
 export default class Post extends Model<Post> implements PostInterface {
     @ForeignKey(() => User)
     @Column

@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import ApiService from "../services/ApiService";
+import ApiService from '../services/ApiService';
 
 const GET = {
     index: async (_req: Request, res: Response) => {

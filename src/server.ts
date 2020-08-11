@@ -1,9 +1,9 @@
-import "./config/environment";
-import express from "express";
-import cors from "cors";
+import './config/environment';
+import express from 'express';
+import cors from 'cors';
 
-import { sequelize } from "./config/database";
-import Routes from "./routes";
+import { sequelize } from './config/database';
+import Routes from './routes';
 
 const app = express();
 

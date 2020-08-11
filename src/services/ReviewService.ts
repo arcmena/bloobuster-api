@@ -1,5 +1,5 @@
-import Review from "../models/Post";
-import User from "../models/User";
+import Review from '../models/Post';
+import User from '../models/User';
 
 export default class ReviewService {
     getReview = (): Promise<Review[]> =>
@@ -8,20 +8,20 @@ export default class ReviewService {
                 include: [
                     {
                         model: User,
-                        as: "authorInfo",
-                        attributes: ["username", "email"],
+                        as: 'authorInfo',
+                        attributes: ['username', 'email'],
                     },
                 ],
             })
-                .then((response) => resolve(response))
-                .catch((error) => reject(error))
+                .then(response => resolve(response))
+                .catch(error => reject(error)),
         );
 
     getReviewsById = (id: number): Promise<Review> =>
         new Promise((resolve, reject) =>
             Review.findByPk(id)
-                .then((response) => resolve(response))
-                .catch((error) => reject(error))
+                .then(response => resolve(response))
+                .catch(error => reject(error)),
         );
 
     createReview = (
@@ -30,7 +30,7 @@ export default class ReviewService {
         titleId: string,
         title: string,
         titleImg: string,
-        rating: number
+        rating: number,
     ): Promise<Review> =>
         new Promise((resolve, reject) =>
             Review.create({
@@ -39,9 +39,9 @@ export default class ReviewService {
                 titleId,
                 title,
                 titleImg,
-                rating
+                rating,
             })
-                .then((response) => resolve(response))
-                .catch((error) => reject(error))
+                .then(response => resolve(response))
+                .catch(error => reject(error)),
         );
 }

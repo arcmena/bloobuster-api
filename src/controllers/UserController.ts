@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { Request, Response } from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-import UserService from "../services/UserService";
+import UserService from '../services/UserService';
 
 const GET = {
     getUsers: async (_req: Request, res: Response) => {
@@ -64,13 +64,9 @@ const GET = {
     refreshToken: (req: Request, res: Response) => {
         const { id, username, email } = req.body;
 
-        const token = jwt.sign(
-            { id, username, email },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1d",
-            }
-        );
+        const token = jwt.sign({ id, username, email }, process.env.JWT_SECRET, {
+            expiresIn: '1d',
+        });
 
         return res.status(200).send({ token, user: { id, username, email } });
     },
@@ -87,8 +83,8 @@ const POST = {
 
             await userService
                 .createUser({ username, name, email, password: hashcode })
-                .then((user) => res.status(201).send(user))
-                .catch((error) => res.status(500).send(error));
+                .then(user => res.status(201).send(user))
+                .catch(error => res.status(500).send(error));
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -102,18 +98,13 @@ const POST = {
 
             const user = await userService.getUserByUsername(username);
 
-            if (!user || !(await bcrypt.compare(password, user.password)))
-                throw new Error("Credentials don't match");
+            if (!user || !(await bcrypt.compare(password, user.password))) throw new Error("Credentials don't match");
 
             const { id, email, name } = user;
 
-            const token = jwt.sign(
-                { id, username, email },
-                process.env.JWT_SECRET,
-                {
-                    expiresIn: "1d",
-                }
-            );
+            const token = jwt.sign({ id, username, email }, process.env.JWT_SECRET, {
+                expiresIn: '1d',
+            });
 
             res.status(200).send({
                 token,

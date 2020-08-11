@@ -1,13 +1,6 @@
-import {
-    Table,
-    Model,
-    Column,
-    AllowNull,
-    Unique,
-    HasMany,
-} from "sequelize-typescript";
+import { Table, Model, Column, AllowNull, Unique, HasMany } from 'sequelize-typescript';
 
-import Post from "./Post";
+import Post from './Post';
 
 export interface UserInterface {
     username: string;
@@ -16,7 +9,7 @@ export interface UserInterface {
     password: string;
 }
 
-@Table({ tableName: "users" })
+@Table({ tableName: 'users' })
 export default class User extends Model<User> implements UserInterface {
     @AllowNull(false)
     @Unique(true)
