@@ -21,6 +21,7 @@ It's going to be integrated with IMDb-API to search and relate to the user in th
 -   PostgreSQL
 -   JWT
 
+
 ## Movie API
 
 To get the movie and tv series information we are using the [imdb-api](https://imdb-api.com). They have a free tier subscription with up to 100 requests by day.
