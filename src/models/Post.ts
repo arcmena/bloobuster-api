@@ -19,10 +19,10 @@ export default class Post extends Model<Post> implements PostInterface {
     @Column
     authorId: number;
 
-    @Column
+    @Column(DataTypes.TEXT)
     content: string;
 
-    @Column(DataTypes.TEXT)
+    @Column
     titleId: string;
 
     @Column
