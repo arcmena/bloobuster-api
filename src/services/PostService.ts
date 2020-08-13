@@ -2,9 +2,10 @@ import Post from '../models/Post';
 import User from '../models/User';
 
 export default class ReviewService {
-    getReview = (): Promise<Post[]> =>
+    getPosts = (): Promise<Post[]> =>
         new Promise((resolve, reject) =>
             Post.findAll({
+                order: [['id', 'DESC']],
                 include: [
                     {
                         model: User,

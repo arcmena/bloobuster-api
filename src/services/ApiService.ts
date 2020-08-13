@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { resolve, reject } from 'bluebird';
+import { resolve, reject, Promise } from 'bluebird';
 
 //TODO: CHANGE THIS SHIET TO NODE-FETCH
 
@@ -7,8 +7,12 @@ const { API_KEY, API_ENDPOINT } = process.env;
 
 export default class ApiService {
     searchByTitle = async (title: string) => {
-        const res = await axios.get(`${API_ENDPOINT}/Search/${API_KEY}/${title}`);
-        return res.data;
+        const { data } = await axios.get(`${API_ENDPOINT}/Search/${API_KEY}/${title}`);
+        const resizedData = data.results.map(movie => {
+            const resizedImage = movie.image.split('V1_')[0].concat('V1_UX192_CR0,4,192,264_AL_.jpg');
+            return { ...movie, resizedImage };
+        });
+        return resizedData;
     };
 
     getTitleById = async (id: string) => {

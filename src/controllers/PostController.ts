@@ -8,7 +8,7 @@ const GET = {
         try {
             const postService = new PostService();
 
-            const posts = await postService.getReview();
+            const posts = await postService.getPosts();
 
             res.status(200).send(posts);
         } catch (error) {

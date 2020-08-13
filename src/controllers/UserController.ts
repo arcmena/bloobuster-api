@@ -93,6 +93,7 @@ const POST = {
     login: async (req: Request, res: Response) => {
         try {
             const { username, password } = req.body;
+            console.log(username, password)
 
             const userService = new UserService();
 

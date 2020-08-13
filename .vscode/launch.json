@@ -5,12 +5,14 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Bloobuster Server",
-            "program": "${workspaceFolder}\\src\\server.ts",
+            "program": "${workspaceFolder}/src/server.ts",
             "preLaunchTask": "npm: build",
             "sourceMaps": true,
             "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
-            "outFiles": ["${workspaceFolder}/tmp/**/*.js"],
+            "outFiles": [
+                "${workspaceFolder}/tmp/**/*.js"
+            ],
             "envFile": "${workspaceFolder}/.env.development"
         }
     ]

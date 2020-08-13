@@ -12,11 +12,11 @@ const route = express.Router();
 
 //Admin User
 route.get('/users/all', UserController.getUsers);
-route.get('/user/:username', UserController.getUserByUsername);
 
 //Client User
 route.get('/refreshToken', isLoggedIn, UserController.refreshToken);
 route.get('/getUser/:id', isLoggedIn, UserController.getUserById);
+route.get('/user/:username', isLoggedIn, UserController.getUserByUsername);
 route.post('/createUser', UserController.createUser);
 route.post('/login', UserController.login);
 
