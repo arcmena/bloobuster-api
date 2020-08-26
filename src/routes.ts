@@ -1,19 +1,19 @@
 import express from 'express';
 
-//Controllers
+// Controllers
 import UserController from './controllers/UserController';
 import ApiController from './controllers/ApiController';
 import PostController from './controllers/PostController';
 
-//Middlewares
+// Middlewares
 import isLoggedIn from './middlewares/isLoggedIn';
 
 const route = express.Router();
 
-//Admin User
+// Admin User
 route.get('/users/all', UserController.getUsers);
 
-//Client User
+// Client User
 route.get('/refreshToken', isLoggedIn, UserController.refreshToken);
 route.get('/getUser/:id', isLoggedIn, UserController.getUserById);
 route.get('/user/:username', isLoggedIn, UserController.getUserByUsername);

@@ -43,8 +43,6 @@ const GET = {
 
             const userService = new UserService();
 
-            console.log(id);
-
             const user = await userService.getUserById(Number(id));
 
             if (!user) {
@@ -53,9 +51,7 @@ const GET = {
                 });
             }
 
-            const { name, email } = user;
-
-            res.status(200).send({ user: { name, email } });
+            res.status(200).send({ user });
         } catch (error) {
             res.status(500).send({ error: error.message });
         }
@@ -93,7 +89,7 @@ const POST = {
     login: async (req: Request, res: Response) => {
         try {
             const { username, password } = req.body;
-            console.log(username, password)
+            console.log(username, password);
 
             const userService = new UserService();
 

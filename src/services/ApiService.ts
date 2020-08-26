@@ -22,8 +22,8 @@ export default class ApiService {
 
     index = async () => {
         return Promise.all([
-            axios.get(`${API_ENDPOINT}/MostPopularMovies/${API_KEY}`), //trending movies
-            axios.get(`${API_ENDPOINT}/ComingSoon/${API_KEY}`), //coming soon movies
+            axios.get(`${API_ENDPOINT}/MostPopularMovies/${API_KEY}`), // trending movies
+            axios.get(`${API_ENDPOINT}/ComingSoon/${API_KEY}`), // coming soon movies
         ])
             .then(response =>
                 resolve({
@@ -42,10 +42,10 @@ export default class ApiService {
 
     movieIndex = async () => {
         return Promise.all([
-            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls027328830`), //action movies
-            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls009609925`), //adventure movies
-            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls021424736`), //sci-fi movies
-            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls027345371`), //animation movies
+            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls027328830`), // action movies
+            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls009609925`), // adventure movies
+            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls021424736`), // sci-fi movies
+            axios.get(`${API_ENDPOINT}/IMDbList/${API_KEY}/ls027345371`), // animation movies
         ])
             .then(response =>
                 resolve({
